@@ -44,7 +44,6 @@ int temperatura = 0,    //Armazena a Temperatura em Inteiro
     umidadeAr = 0,      //Armazena a Umidade do Ar em Inteiro
     umidadeSolo = 0,    //Armazena a Umidade do Solo em Inteiro
     luminosidade = 0;   //Armazena a Luminosidade em Inteiro
-    
 int temperaturas[n],    //Vetor com os valores para a Média Móvel
     umidadesAr[n],      //Vetor com os valores para a Média Móvel
     umidadesSolo[n],    //Vetor com os valores para a Média Móvel
