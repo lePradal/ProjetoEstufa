@@ -25,12 +25,18 @@
 
 dht DHT;              //Objeto para o Sensor
 
+/*=========================================================================
+                             Constantes Globais                          */
+
+#define n 10           //Número de componentes da Média Móvel
 
 /*=========================================================================
                               Variáveis Globais                          */
 
 int temperatura = 0, //Armazena a Temperatura em Inteiro
     umidadeAr = 0;   //Armazena a Umidade do Ar em Inteiro
+int numbers[n];      //Vetor com os valores para a Média Móvel
+
 
 /*=========================================================================
                             Configurações Iniciais                       */
@@ -41,7 +47,9 @@ void setup() {
 /*=========================================================================
                                  Loop Infinito                           */
 void loop() {
-  
+  lerUmidTemp();
+  temperatura = movingAverage(temperatura);
+  umidadeAr = movingAverage(umidadeAr);
   delay(50);
 }
 /*=========================================================================
@@ -67,4 +75,12 @@ void lerUmidTemp(){
   DHT.read11(dht_pin);
   temperatura = DHT.temperature;
   umidadeAr = DHT.humidity;
+}
+
+long movingAverage(int variavelLida){
+  for(int i = n-1; i > 0; i--) numbers[i] = numbers[i - 1];
+  numbers[0] = variavelLida;
+  long acc = 0;
+  for(int i = 0; i < n; i++) acc += numbers[i];
+  return acc/n;
 }
